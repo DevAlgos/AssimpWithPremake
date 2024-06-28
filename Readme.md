@@ -1,3 +1,7 @@
+(Note original premake was taken from https://gist.github.com/Cannedfood/a71652022f066c8032f5a1c01919c55d) 
+Slightly edited and added a revision.h and config.h from a static library build on a windows machine, may need to build a seperate cmake project and take those neccesary files
+and change whats needed. To get this working just move the premake5.lua just outside this directory.
+
 Open Asset Import Library (assimp)
 ==================================
 
