@@ -1,45 +1,44 @@
 project 'assimp'
 	kind 'StaticLib'
 	warnings 'Off'
-	optimize 'Speed'
 
-	targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}") 
-        objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
+	targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
+    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
 
 	includedirs {
-		'assimp/',
-		'assimp/contrib/',
-		'assimp/contrib/irrXML/',
-		'assimp/contrib/unzip/',
-		'assimp/contrib/rapidjson/include/',
-		'assimp/contrib/pugixml/src/',
-		'assimp/contrib/zlib/',
-		'assimp/contrib/utf8cpp/source',
-		'assimp/code',
-		'assimp/include',
+		'AssimpWithPremake/',
+		'AssimpWithPremake/contrib/',
+		'AssimpWithPremake/contrib/irrXML/',
+		'AssimpWithPremake/contrib/unzip/',
+		'AssimpWithPremake/contrib/rapidjson/include/',
+		'AssimpWithPremake/contrib/pugixml/src/',
+		'AssimpWithPremake/contrib/zlib/',
+		'AssimpWithPremake/contrib/utf8cpp/source',
+		'AssimpWithPremake/code',
+		'AssimpWithPremake/include',
 	}
 	files {
 		-- Dependencies
-		'assimp/contrib/unzip/**',
-		'assimp/contrib/irrXML/**',
-		'assimp/contrib/zlib/*',
+		'AssimpWithPremake/contrib/unzip/**',
+		'AssimpWithPremake/contrib/irrXML/**',
+		'AssimpWithPremake/contrib/zlib/*',
 		-- Common
-		'assimp/code/Common/**',
-		'assimp/code/PostProcessing/**',
-		'assimp/code/Material/**',
-		'assimp/code/CApi/**',
-		'assimp/code/Geometry/**',
+		'AssimpWithPremake/code/Common/**',
+		'AssimpWithPremake/code/PostProcessing/**',
+		'AssimpWithPremake/code/Material/**',
+		'AssimpWithPremake/code/CApi/**',
+		'AssimpWithPremake/code/Geometry/**',
 		-- Importers
-		'assimp/code/AssetLib/IQM/**',
-		'assimp/code/AssetLib/Assbin/**',
+		'AssimpWithPremake/code/AssetLib/IQM/**',
+		'AssimpWithPremake/code/AssetLib/Assbin/**',
 
-		'assimp/code/AssetLib/Collada/**',
-		'assimp/code/AssetLib/Obj/**',
+		'AssimpWithPremake/code/AssetLib/Collada/**',
+		'AssimpWithPremake/code/AssetLib/Obj/**',
 		-- 'assimp/code/AssetLib/Blender/**', 'assimp/contrib/poly2tri/poly2tri/**',
-		'assimp/code/AssetLib/FBX/**',
+		'AssimpWithPremake/code/AssetLib/FBX/**',
 		-- 'assimp/code/glTF2/**',
 		-- 'assimp/code/glTF/**',
-		'assimp/code/Assbin/**' -- Very fast format to parse/write, useful for caching
+		'AssimpWithPremake/code/Assbin/**' -- Very fast format to parse/write, useful for caching
 	}
 	-- Importers
 	defines {
@@ -111,3 +110,19 @@ project 'assimp'
 		'ASSIMP_BUILD_NO_3MF_EXPORTER',
 		'ASSIMP_BUILD_NO_ASSJSON_EXPORTER'
 	}
+
+	filter "configurations:Debug"
+        defines { "DEBUG" }
+        runtime "Debug"
+        symbols "on"
+
+    filter "configurations:Release"
+        defines { "RELEASE" }
+        runtime "Release"
+        optimize "on"
+
+    filter "configurations:Dist"
+       defines { "DIST" }
+       runtime "Release"
+       optimize "On"
+       symbols "Off"
